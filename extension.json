@@ -1,0 +1,6 @@
+{
+    "name": "Tello",
+    "type": "robot",
+    "extensions": ["Tello"],
+    "image": "tello.png"
+}
