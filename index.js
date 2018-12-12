@@ -30,7 +30,7 @@ class TelloExtension {
     }
 
     write (data){
-        if (!data.endsWith('\n')) data += '\n';
+        // if (!data.endsWith('\n')) data += '\n';
         if (this.session) this.session.write(data);
     }
 
@@ -49,6 +49,7 @@ class TelloExtension {
             const lines = this.lineBuffer.split('\n');
             this.lineBuffer = lines.pop();
             for (const l of lines){
+                console.log("Tello >>", l);
                 if (this.reporter) this.reporter(l);
             }
         }
