@@ -7,6 +7,7 @@ const BlockType = Scratch.BlockType;
 const formatMessage = Scratch.formatMessage;
 const log = Scratch.log;
 
+
 const isNumber = n => {
     n = n.replace(/'/g, '')
     return !isNaN(parseFloat(n)) && isFinite(n);
@@ -274,6 +275,23 @@ class TelloExtension {
                     },
                     func: 'setSpeed'
                 },
+                {//flip
+                    opcode: 'flip',
+                    blockType: BlockType.COMMAND,
+
+                    text: formatMessage({
+                        id: 'Tello.flip',
+                        default: 'Flip [TAKEPUT]'
+                    }),
+                    arguments: {
+                        TAKEPUT: {
+                            type: ArgumentType.STRING,
+                            defaultValue: 'forward',
+                            menu: 'takeput'
+                        }
+                    },
+                    func: 'flip'
+                },
                 {
                     opcode: 'getBattery',
                     blockType: BlockType.REPORTER,
@@ -286,10 +304,11 @@ class TelloExtension {
                 }
             ],
             menus: {
-
+                takeput: ['forward', 'back', 'left','right']
             },
             translation_map: {
                 'zh-cn': {
+                    flip: '翻滚 [TAKEPUT]'
 
                 }
             }
@@ -298,6 +317,23 @@ class TelloExtension {
 
     noop (){
 
+    }
+    flip (args){
+        let param = 'f';
+        if (args.TAKEPUT === 'forward') {
+            param = 'f';
+        }
+        else if (args.TAKEPUT === 'back') {
+            param = 'b';
+        }
+        else if (args.TAKEPUT === 'left') {
+            param = 'l';
+        }
+        else {
+            param = 'r';
+        }
+        const cmd = `flip ${param}`;
+        this.write(cmd);
     }
 
     command (args){
