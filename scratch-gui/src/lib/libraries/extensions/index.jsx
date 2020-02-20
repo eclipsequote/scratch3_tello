@@ -326,7 +326,7 @@ export default [
     {
         name: 'DJI Tello',
         extensionId: 'tello',
-        collaborator: 'DJI',
+        collaborator: 'RYZE',
         iconURL: telloIconURL,
         insetIconURL: telloInsetIconURL,
         description: (
